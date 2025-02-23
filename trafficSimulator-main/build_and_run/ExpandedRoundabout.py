@@ -85,6 +85,16 @@ class Intersection:
         self.sim.create_quadratic_bezier_curve((-radius - lane_space, -lane_space*2 - island_width/2), (-radius - lane_space, -lane_space*3/2 - island_width/2), (-intersection_size/2, -lane_space*3/2 - island_width/2))
         self.sim.create_quadratic_bezier_curve((-lane_space*2 - island_width/2, radius + lane_space), (-lane_space*3/2 - island_width/2, radius + lane_space), (-lane_space*3/2 - island_width/2, intersection_size/2))
 
+        #underground passage 48-50
+        self.sim.create_segment((0, radius*2),(0, radius/2))
+        self.sim.create_segment((-radius*2,0),(-radius/2, 0))
+        self.sim.create_segment((radius/2,-radius/2),(radius*3/2,-radius*3/2))
+        #underground turns to exit 51-52
+        self.sim.create_quadratic_bezier_curve((0, radius/2),(0,0),(radius/2,-radius/2))
+        self.sim.create_quadratic_bezier_curve((-radius/2, 0),(0,0),(radius/2,-radius/2))
+        #turn into the underground passage 53
+        self.sim.create_quadratic_bezier_curve((lane_space/2 + island_width/2, length + intersection_size/2),(0,(length + intersection_size/2)/2),(0,radius*2))
+        self.sim.create_quadratic_bezier_curve((-length - intersection_size/2,lane_space/2 + island_width/2),(-(length + intersection_size/2)/2,0),(-radius*2,0))
 
 
         self.vg = VehicleGenerator({
