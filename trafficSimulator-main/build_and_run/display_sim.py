@@ -1,4 +1,4 @@
-from base_intersection import *
+from ExpandedRoundabout import *
 
 #defining the intersection
 intersection = Intersection()

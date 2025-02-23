@@ -35,14 +35,14 @@ class Intersection:
         self.sim.create_segment((-length - intersection_size/2, lane_space*3/2 + island_width/2), (-intersection_size/2, lane_space*3/2 + island_width/2))
         # Intersection out
             #paths 8-15
-        self.sim.create_segment((-lane_space/2 - island_width/2, intersection_size/2), (-lane_space/2 - island_width/2, length + intersection_size/2))
-        self.sim.create_segment((-lane_space*3/2 - island_width/2, intersection_size/2), (-lane_space*3/2 - island_width/2, length + intersection_size/2))
-        self.sim.create_segment((intersection_size/2, lane_space/2 + island_width/2), (length+intersection_size/2, lane_space/2 + island_width/2))
-        self.sim.create_segment((intersection_size/2, lane_space*3/2 + island_width/2), (length+intersection_size/2, lane_space*3/2 + island_width/2))
-        self.sim.create_segment((lane_space/2 + island_width/2, -intersection_size/2), (lane_space/2 + island_width/2, -length - intersection_size/2))
-        self.sim.create_segment((lane_space*3/2 + island_width/2, -intersection_size/2), (lane_space*3/2 + island_width/2, -length-intersection_size/2))
-        self.sim.create_segment((-intersection_size/2, -lane_space/2 - island_width/2), (-length-intersection_size/2, -lane_space/2 - island_width/2))
-        self.sim.create_segment((-intersection_size/2, -lane_space*3/2 - island_width/2), (-length - intersection_size/2, -lane_space*3/2 - island_width/2))
+        self.sim.create_segment((-lane_space - island_width, intersection_size), (-lane_space/2 - island_width/2, length + intersection_size/2))
+        self.sim.create_segment((-lane_space - island_width, intersection_size), (-lane_space*3/2 - island_width/2, length + intersection_size/2))
+        self.sim.create_segment((intersection_size, lane_space + island_width), (length+intersection_size/2, lane_space/2 + island_width/2))
+        self.sim.create_segment((intersection_size, lane_space + island_width), (length+intersection_size/2, lane_space*3/2 + island_width/2))
+        self.sim.create_segment((lane_space + island_width, -intersection_size), (lane_space/2 + island_width/2, -length - intersection_size/2))
+        self.sim.create_segment((lane_space + island_width, -intersection_size), (lane_space*3/2 + island_width/2, -length-intersection_size/2))
+        self.sim.create_segment((-intersection_size, -lane_space - island_width), (-length-intersection_size/2, -lane_space/2 - island_width/2))
+        self.sim.create_segment((-intersection_size, -lane_space - island_width), (-length - intersection_size/2, -lane_space*3/2 - island_width/2))
 
         # Straight
             #paths 16-23
