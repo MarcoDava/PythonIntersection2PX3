@@ -292,7 +292,7 @@ class Window:
                     (0, 0),
                     (vehicle.l, 0),
                     thickness= vehicle.w*self.zoom,
-                    color=(0, 0, 255),
+                    color=vehicle.colour,
                     parent=node
                 )
 

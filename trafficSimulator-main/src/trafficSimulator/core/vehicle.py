@@ -28,7 +28,7 @@ class Vehicle:
         self.path = []
         self.current_road_index = 0
         self.pedestrian = False
-
+        self.colour = (0, 0, 225)
         self.x = 0
         self.v = 16.6
         self.a = 0

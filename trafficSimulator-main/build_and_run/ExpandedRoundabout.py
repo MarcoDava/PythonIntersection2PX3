@@ -19,7 +19,7 @@ class Intersection:
         self.sim.create_segment((-lane_space/2 - island_width/2, -length - intersection_size/2), (-lane_space/2 - island_width/2, - intersection_size/2)) #north west
         self.sim.create_segment((-length - intersection_size/2, lane_space/2 + island_width/2), (-intersection_size/2, lane_space/2 + island_width/2))#south west
 
-        #inner exit4-7
+        #inner exit 4-7
         self.sim.create_segment((-lane_space/2 - island_width/2, intersection_size/2), (-lane_space/2 - island_width/2, length + intersection_size/2))#south west
         self.sim.create_segment((intersection_size/2, lane_space/2 + island_width/2), (length+intersection_size/2, lane_space/2 + island_width/2))# south east
         self.sim.create_segment((lane_space/2 + island_width/2, -intersection_size/2), (lane_space/2 + island_width/2, -length - intersection_size/2))#north east
@@ -85,61 +85,59 @@ class Intersection:
         self.sim.create_quadratic_bezier_curve((-radius - lane_space, -lane_space*2 - island_width/2), (-radius - lane_space, -lane_space*3/2 - island_width/2), (-intersection_size/2, -lane_space*3/2 - island_width/2))
         self.sim.create_quadratic_bezier_curve((-lane_space*2 - island_width/2, radius + lane_space), (-lane_space*3/2 - island_width/2, radius + lane_space), (-lane_space*3/2 - island_width/2, intersection_size/2))
 
-        #underground passage 48-50
+        #underground passage straights 48-49
         self.sim.create_segment((0, radius*2),(0, radius/2))
         self.sim.create_segment((-radius*2,0),(-radius/2, 0))
+
+        #underground connection 50
         self.sim.create_segment((radius/2,-radius/2),(radius*3/2,-radius*3/2))
+
         #underground turns to exit 51-52
         self.sim.create_quadratic_bezier_curve((0, radius/2),(0,0),(radius/2,-radius/2))
         self.sim.create_quadratic_bezier_curve((-radius/2, 0),(0,0),(radius/2,-radius/2))
-        #turn into the underground passage 53
-        self.sim.create_quadratic_bezier_curve((lane_space/2 + island_width/2, length + intersection_size/2),(0,(length + intersection_size/2)/2),(0,radius*2))
-        self.sim.create_quadratic_bezier_curve((-length - intersection_size/2,lane_space/2 + island_width/2),(-(length + intersection_size/2)/2,0),(-radius*2,0))
+        
+        #spawn and entrance into the underground passage 53-54
+        self.sim.create_segment((lane_space/2 + island_width/2, length + intersection_size/2),(0,radius*2))
+        self.sim.create_segment((-length - intersection_size/2,lane_space/2 + island_width/2),(-radius*2,0))
+
+        #north west entrance curve into exit 55
+        self.sim.create_quadratic_bezier_curve((-lane_space/2 - island_width/2, -length - intersection_size/2),(0,-radius*2),(radius*3/2,-radius*3/2))
+
+        #underground exit 56
+        self.sim.create_segment((radius*3/2,-radius*3/2),(intersection_size,-intersection_size))
+
 
 
         self.vg = VehicleGenerator({
 
 
             'vehicles': [
-                #(1, {'path': [0, 16, 8,20,5],'v_max':self.v}),# need to delete the correct exit
-                (1, {'path': [0, 16, 8,12,9,21,6],'v_max':self.v}),
-                (1, {'path': [0, 16, 8,12,9,13,10,22,7],'v_max':self.v}),
-                (1, {'path': [0, 16, 8,12,9,13,10,14,11,23,4],'v_max':self.v}),
+                (1, {'path': [0, 16, 8,12,9,21,6],'v_max':self.v, 'colour':(225,225,0)}),  #left lane, bottom to top
+                (1, {'path': [0, 16, 8,12,9,13,10,22,7],'v_max':self.v, 'colour':(225,225,0)}), #left lane, bottom to left
 
-                #(1,{'path': [1, 17, 9, 21, 6],'v_max':self.v}),
-                (1, {'path': [1,17,9,13,10,22,7],'v_max':self.v}),
-                (1, {'path': [1, 17, 9,13,10,14,11,23,4],'v_max':self.v}),
-                (1, {'path': [1, 17, 9,13,10,14,11,15,8,20,5],'v_max':self.v}),
+                (1, {'path': [1,17,9,13,10,22,7],'v_max':self.v, 'colour':(0,225,0)}), #left lane, right to left
+                (1, {'path': [1, 17, 9,13,10,14,11,23,4],'v_max':self.v, 'colour':(0,225,0)}), #left lane, right to bottom
 
-                #(1, {'path': [2, 18, 10, 22, 7],'v_max':self.v}),
-                (1, {'path': [2,18,10,14,11,23,4],'v_max':self.v}),
-                (1, {'path': [2,18,10,14,11,15,8,20,5],'v_max':self.v}),
-                (1, {'path': [2, 18, 10,14,11,15,8,12,9,21,6],'v_max':self.v}),
+                (1, {'path': [2,18,10,14,11,23,4],'v_max':self.v, 'colour':(0,0,225)}), #left lane, top to bottom
+                (1, {'path': [2,18,10,14,11,15,8,20,5],'v_max':self.v, 'colour':(0,0,225)}), #left lane, top to right
                 
-                #(1, {'path': [3, 19, 11, 23, 4],'v_max':self.v}),
-                (1, {'path': [3,19,11,15,8,20,5],'v_max':self.v}),
-                (1, {'path': [3,19,11,15,8,12,9,21,6],'v_max':self.v}),
-                (1, {'path': [3, 19, 11,15,8,12,9,13,10,22,7],'v_max':self.v}),
+                (1, {'path': [3,19,11,15,8,20,5],'v_max':self.v, 'colour':(0,0,0)}), #left lane, left to right
+                (1, {'path': [3,19,11,15,8,12,9,21,6],'v_max':self.v, 'colour':(0,0,0)}), #left lane, left to top
 
-                (1, {'path': [24, 40, 32,44,29],'v_max':self.v}),#outer lane, need to change so they only exit to the correct exit
-                # (1, {'path': [24, 40, 32,36,33,45,30],'v_max':self.v}),
-                # (1, {'path': [24, 40, 32,36,33,37,34,46,31],'v_max':self.v}),
-                # (1, {'path': [24, 40, 32,36,33,37,34,38,35,47,28],'v_max':self.v}),
+                (1, {'path': [24, 40, 32,44,29],'v_max':self.v, 'colour':(225,225,225)}), #bottom right turn
+                (1, {'path': [25, 41, 33, 45, 30],'v_max':self.v, 'colour':(225,225,225)}), #right right turn
+                (1, {'path': [26, 42, 34, 46, 31],'v_max':self.v, 'colour':(225,225,225)}), #top right turn
+                (1, {'path': [27, 43, 35, 47, 28],'v_max':self.v, 'colour':(225,225,225)}), #left right turn
 
-                (1, {'path': [25, 41, 33, 45, 30],'v_max':self.v}),
-                # (1, {'path': [25,41,33,37,34,46,31],'v_max':self.v}),
-                # (1, {'path': [25, 41, 33,37,34,38,35,47,28],'v_max':self.v}),
-                # (1, {'path': [25, 41, 33,37,34,38,35,39,32,44,29],'v_max':self.v}),
+                (1, {'path': [24, 40, 32, 36, 33, 30],'v_max':self.v, 'colour':(225,0,225)}), #right lane, bottom to top
+                (1, {'path': [25, 41, 33, 37, 34, 31],'v_max':self.v, 'colour':(225,0,225)}), #right lane, right to left
+                (1, {'path': [26, 42, 34, 38, 35, 28],'v_max':self.v, 'colour':(225,0,225)}), #right lane, top to bottom
+                (1, {'path': [27, 43, 35, 39, 32, 29],'v_max':self.v, 'colour':(225,0,225)}), #left right turn
 
-                (1, {'path': [26, 42, 34, 46, 31],'v_max':self.v}),
-                # (1, {'path': [26,42,34,38,35,47,28],'v_max':self.v}),
-                # (1, {'path': [26,42,34,38,35,39,32,44,29],'v_max':self.v}),
-                # (1, {'path': [26, 42, 34,38,35,39,32,36,33,45,30],'v_max':self.v}),
-
-                (1, {'path': [27, 43, 35, 47, 28],'v_max':self.v}),
-                # (1, {'path': [27,43,35,39,32,44,29],'v_max':self.v}),
-                # (1, {'path': [27,43,35,39,32,36,33,45,30],'v_max':self.v}),
-                # (1, {'path': [27, 43, 35,39,32,36,33,37,34,46,31],'v_max':self.v}),
+                (1, {'path': [53, 48, 51,50,56],'v_max':self.v, 'colour':(225,0,0)}), #bottom ambulance lane
+                (1, {'path': [54, 49, 52,50,56],'v_max':self.v, 'colour':(225,0,0)}), #left ambulance lane
+                (1, {'path': [55, 56],'v_max':self.v, 'colour':(225,0,0)}), #top ambulance lane
+                
             ], 'vehicle_rate': 30
         }
         

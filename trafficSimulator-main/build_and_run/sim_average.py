@@ -1,4 +1,4 @@
-from AdvancedRoundabout import *
+from ExpandedRoundabout import *
 import pandas as pd
 import matplotlib.pyplot as plt
 import time
@@ -26,7 +26,7 @@ def run_sim(sim, sim_time):
     time_standard_deviations.append((sim.get_vehicle_time_variance()**(1/2)))
 
 for i in range(number_of_sims):
-    intersection = AIntersection()
+    intersection = Intersection()
     temp_sim = intersection.get_sim()
     run_sim(temp_sim, simulation_time)
     data += temp_sim.vehicle_times
